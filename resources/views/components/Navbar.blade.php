@@ -15,13 +15,18 @@
             </div>
             <div class="flex items-center justify-between gap-x-16">
                 <div>
-                    <a href="/"><img class="w-28" src={{ asset('logo.png') }}></a>
+                    <a href="{{ route('home') }}"><img class="w-28" src={{ asset('logo.png') }}></a>
                 </div>
-                <div class="flex items-center shadow-sm shadow-neutral-500 grow rounded-md self-end h-10 px-2">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder="Search by Title, Author, ISBN"
-                        class="px-2 grow h-full focus:outline-none">
-                </div>
+                <form method="GET" action="{{ route('search') }}" class="grow">
+                    <div class="flex items-center shadow-sm shadow-neutral-500 grow rounded-md self-end h-10 px-2 mt-3">
+                        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <input type="text" name='keyword' placeholder="Search by Title, Author, ISBN"
+                            class="px-2 grow h-full focus:outline-none">
+                    </div>
+                    @if (session()->has('searchNotFoundError'))
+                        <p class="text-red-500 text-sm">{{ session('searchNotFoundError') }}</p>
+                    @endif
+                </form>
                 <div>
                     <a href="flex items-center gap-x-1">
                         <i class="fa-solid fa-basket-shopping"></i>

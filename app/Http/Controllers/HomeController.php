@@ -10,8 +10,7 @@ class HomeController extends Controller
 {
   public function __invoke()
   {
-    $categories = Category::all();
     $books = Book::all();
-    return view('home', compact('categories', 'books'));
+    return view('home', compact('books'));
   }
 }

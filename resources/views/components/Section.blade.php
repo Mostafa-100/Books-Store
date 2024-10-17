@@ -8,5 +8,5 @@
     <div class="grid xl:grid-cols-8 gap-2">
         {{ $slot }}
     </div>
-    <a href="#" class="block w-fit mx-auto bg-zinc-700 text-white text-xs rounded-md py-1.5 px-3 mt-5">SEE MORE</a>
+    {{ $more }}
 </section>

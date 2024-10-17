@@ -10,7 +10,6 @@ class BookController extends Controller
 {
   public function show(Book $book)
   {
-    $categories = Category::all();
-    return view('book-page', compact('book', 'categories'));
+    return view('book-page', compact('book'));
   }
 }
