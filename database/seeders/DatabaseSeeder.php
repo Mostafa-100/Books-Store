@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Author;
 use App\Models\Book;
+use App\Models\Category;
 use App\Models\Publisher;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;

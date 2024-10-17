@@ -15,7 +15,7 @@
             </div>
             <div class="flex items-center justify-between gap-x-16">
                 <div>
-                    <img class="w-28" src={{ asset('logo.png') }}>
+                    <a href="/"><img class="w-28" src={{ asset('logo.png') }}></a>
                 </div>
                 <div class="flex items-center shadow-sm shadow-neutral-500 grow rounded-md self-end h-10 px-2">
                     <i class="fa-solid fa-magnifying-glass"></i>
@@ -34,7 +34,7 @@
     <div class="bg-orange-500 p-px">
         <div class="container mx-auto text-sm font-medium">
             @foreach ($categories as $category)
-                <x-Category>{{ $category }}</x-Category>
+                <x-Category :id="$category->id">{{ $category->name }}</x-Category>
             @endforeach
         </div>
     </div>
