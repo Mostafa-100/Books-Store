@@ -12,6 +12,12 @@
                     <i class="fa-solid fa-user"></i>
                     <span class="text-xs">MY ACCOUNT</span>
                 </a>
+                @auth
+                    <a href={{ route('logout') }} class="flex items-center gap-x-1">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        <span class="text-xs">LOGOUT</span>
+                    </a>
+                @endauth
             </div>
             <div class="flex items-center justify-between gap-x-16">
                 <div>

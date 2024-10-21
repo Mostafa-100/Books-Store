@@ -30,3 +30,4 @@ Route::post('/login', [AuthController::class, 'authenticate'])
 
 Route::get('/profile', [UserController::class, 'show'])->name('users.show')
   ->middleware('auth');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
