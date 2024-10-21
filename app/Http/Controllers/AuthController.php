@@ -66,4 +66,11 @@ class AuthController extends Controller
       return redirect('login')->with('login-failure', 'You are not registered on the site');
     }
   }
+
+  public function logout(Request $request)
+  {
+    Auth::logout();
+    $request->session()->invalidate();
+    return redirect()->route('home');
+  }
 }
