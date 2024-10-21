@@ -8,16 +8,16 @@
                     <img class="w-4" src={{ asset('uk.png') }}>
                     <span class="text-xs">ENGLISH</span>
                 </button>
-                <a href="#" class="flex items-center gap-x-1">
+                <a href={{ route('users.show') }} class="flex items-center gap-x-1">
                     <i class="fa-solid fa-user"></i>
                     <span class="text-xs">MY ACCOUNT</span>
                 </a>
             </div>
             <div class="flex items-center justify-between gap-x-16">
                 <div>
-                    <a href="{{ route('home') }}"><img class="w-28" src={{ asset('logo.png') }}></a>
+                    <a href={{ route('home') }}><img class="w-28" src={{ asset('logo.png') }}></a>
                 </div>
-                <form method="GET" action="{{ route('search') }}" class="grow">
+                <form method="GET" action={{ route('search') }}class="grow">
                     <div class="flex items-center shadow-sm shadow-neutral-500 grow rounded-md self-end h-10 px-2 mt-3">
                         <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                         <input type="text" name='keyword' placeholder="Search by Title, Author, ISBN"

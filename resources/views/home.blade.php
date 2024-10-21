@@ -1,5 +1,8 @@
 <x-Template>
     <x-Navbar :categories="$categories" />
+    @if (session()->has('login-success'))
+        <div class="bg-green-500 w-fit mt-3 p-2 mx-auto text-white text-center">{{ session('login-success') }}</div>
+    @endif
     <x-Section title="Hot deals">
         @foreach ($categories->firstWhere('name', 'HOT DEALS')->books as $book)
             <x-Book :id="$book->id" :title="$book->title" :author="$book->author->fullname" :price="$book->price" :coverUrl="$book->coverUrl" />

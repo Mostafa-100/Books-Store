@@ -19,7 +19,7 @@ class SearchController extends Controller
         return view('search-page', compact('books', 'keyword'));
       }
     } else {
-      return redirect()->route('home');
+      return redirect()->current();
     }
   }
 }
