@@ -31,3 +31,14 @@ Route::post('/login', [AuthController::class, 'authenticate'])
 Route::get('/profile', [UserController::class, 'show'])->name('users.show')
   ->middleware('auth');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/forgot-password', [AuthController::class, 'forgotPasswordRequest'])
+  ->middleware('guest')
+  ->name('password.request');
+Route::post('/forgot-password', [AuthController::class, 'forgotPasswordResponse'])
+  ->middleware('guest')
+  ->name('password.email');
+Route::get('/reset-password/{token}', [AuthController::class, 'showResetPassword'])->middleware('guest')
+  ->name('password.reset');
+Route::post('/reset-password', [AuthController::class, 'resetPassword'])
+  ->middleware('guest')
+  ->name('password.update');

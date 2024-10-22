@@ -1,8 +1,10 @@
 <x-template>
     @if (session()->has('register-success'))
         <div class="bg-green-500 p-3 text-white text-center">{{ session('register-success') }}</div>
-    @elseif(session()->has('login-failure'))
+    @elseif (session()->has('login-failure'))
         <div class="bg-red-500 p-3 text-white text-center">{{ session('login-failure') }}</div>
+    @elseif (session()->has('reset-success'))
+        <div class="bg-green-500 p-3 text-white text-center">{{ session('reset-success') }}</div>
     @endif
     <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -21,13 +23,17 @@
                         <input id="email" name="email" type="email" autocomplete="email" required
                             class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
+                    @error('email')
+                        <div class="text-red-500 text-sm">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div>
                     <div class="flex items-center justify-between">
                         <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
                         <div class="text-sm">
-                            <a href="#" class="font-semibold text-orange-500 hover:text-orange-600">Forgot
+                            <a href={{ route('password.request') }}
+                                class="font-semibold text-orange-500 hover:text-orange-600">Forgot
                                 password?</a>
                         </div>
                     </div>
@@ -35,6 +41,9 @@
                         <input id="password" name="password" type="password" autocomplete="current-password" required
                             class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
+                    @error('password')
+                        <div class="text-red-500 text-sm">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div>
