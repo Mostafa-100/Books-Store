@@ -1,5 +1,3 @@
-@props(['categories'])
-
 <nav>
     <div class="container mx-auto">
         <div class="py-4">
@@ -23,14 +21,14 @@
                 <div>
                     <a href={{ route('home') }}><img class="w-28" src={{ asset('logo.png') }}></a>
                 </div>
-                <form method="GET" action={{ route('search') }}class="grow">
+                <form method="GET" action={{ route('search') }} class="grow">
                     <div class="flex items-center shadow-sm shadow-neutral-500 grow rounded-md self-end h-10 px-2 mt-3">
                         <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                         <input type="text" name='keyword' placeholder="Search by Title, Author, ISBN"
                             class="px-2 grow h-full focus:outline-none">
                     </div>
-                    @if (session()->has('searchNotFoundError'))
-                        <p class="text-red-500 text-sm">{{ session('searchNotFoundError') }}</p>
+                    @if ($errors->any())
+                        <div class="text-red-500 text-sm">{{ $errors->first() }}</div>
                     @endif
                 </form>
                 <div>
@@ -44,9 +42,7 @@
     </div>
     <div class="bg-orange-500 p-px">
         <div class="container mx-auto text-sm font-medium">
-            @foreach ($categories as $category)
-                <x-Category :id="$category->id">{{ $category->name }}</x-Category>
-            @endforeach
+            @each('components.category', $categories, 'category')
         </div>
     </div>
 </nav>

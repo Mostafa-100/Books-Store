@@ -9,17 +9,10 @@ class SearchController extends Controller
 {
   public function __invoke(Request $request)
   {
-    if ($request->has('keyword')) {
-      $keyword = $request->keyword;
-      $books = Book::where('title', 'LIKE', '%' . $keyword . '%')->get();
+    $request->validate(['keyword' => 'required']);
 
-      if ($books->isEmpty()) {
-        return redirect()->route('home')->with('searchNotFoundError', 'This book is not exist');
-      } else {
-        return view('search-page', compact('books', 'keyword'));
-      }
-    } else {
-      return redirect()->current();
-    }
+    $books = Book::where('title', 'LIKE', '%' . $request->keyword . '%')->get();
+
+    return view('pages.search', compact('books', 'keyword'));
   }
 }

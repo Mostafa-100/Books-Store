@@ -1,11 +1,16 @@
 <x-template>
-    @if (session()->has('register-success'))
+    @session('register-success')
         <div class="bg-green-500 p-3 text-white text-center">{{ session('register-success') }}</div>
-    @elseif (session()->has('login-failure'))
+    @endsession
+
+    @session('login-failure')
         <div class="bg-red-500 p-3 text-white text-center">{{ session('login-failure') }}</div>
-    @elseif (session()->has('reset-success'))
+    @endsession
+
+    @session('reset-success')
         <div class="bg-green-500 p-3 text-white text-center">{{ session('reset-success') }}</div>
-    @endif
+    @endsession
+
     <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <img class="mx-auto h-10 w-auto" src={{ asset('logo.png') }} alt="Your Company">

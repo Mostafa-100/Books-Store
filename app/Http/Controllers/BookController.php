@@ -10,6 +10,6 @@ class BookController extends Controller
 {
   public function show(Book $book)
   {
-    return view('book-page', compact('book'));
+    return view('pages.book', compact('book'));
   }
 }

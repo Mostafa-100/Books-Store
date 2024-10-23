@@ -10,7 +10,18 @@ class HomeController extends Controller
 {
   public function __invoke()
   {
-    $books = Book::all();
-    return view('home', compact('books'));
+    $categoryNames = ['HOT DEALS', 'BUSINESS', 'FICTION'];
+
+    $categories = Category::all()
+      ->whereIn('name', $categoryNames)
+      ->keyBy('name');
+
+    $homeCategories = [
+      $categories->get('HOT DEALS'),
+      $categories->get('BUSINESS'),
+      $categories->get('FICTION'),
+    ];
+
+    return view('pages.home', compact('homeCategories'));
   }
 }

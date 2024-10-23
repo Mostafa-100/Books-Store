@@ -1,5 +1,10 @@
 <x-Template>
-    <x-Navbar />
+    @include('components.navbar')
+    @if ($errors->any())
+        <div class="bg-red-500 text-center text-white p-3">
+            {{ $errors->first() }}
+        </div>
+    @endif
     <div class="grid place-items-center py-5">
         <form method="post" action={{ route('register') }} class="bg-neutral-100 p-5 rounded-md">
             @csrf
@@ -34,7 +39,7 @@
                             <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">First
                                 name</label>
                             <div class="mt-2">
-                                <input type="text" name="first-name" id="first-name" autocomplete="given-name"
+                                <input type="text" name="first_name" id="first-name" autocomplete="given-name"
                                     class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6">
                                 @error('first-name')
                                     <div class="text-red-500 text-sm">{{ $message }}</div>
@@ -46,7 +51,7 @@
                             <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Last
                                 name</label>
                             <div class="mt-2">
-                                <input type="text" name="last-name" id="last-name" autocomplete="family-name"
+                                <input type="text" name="last_name" id="last-name" autocomplete="family-name"
                                     class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6">
                                 @error('last-name')
                                     <div class="text-red-500 text-sm">{{ $message }}</div>
@@ -119,7 +124,7 @@
                             <label for="postal-code" class="block text-sm font-medium leading-6 text-gray-900">ZIP /
                                 Postal code</label>
                             <div class="mt-2">
-                                <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code"
+                                <input type="text" name="postal_code" id="postal-code" autocomplete="postal-code"
                                     class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6">
                                 @error('postal-code')
                                     <div class="text-red-500 text-sm">{{ $message }}</div>

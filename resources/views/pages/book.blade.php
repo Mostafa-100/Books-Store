@@ -1,5 +1,7 @@
-<x-Template>
-    <x-Navbar :categories="$categories" />
+@extends('template')
+
+@section('content')
+    @include('components.navbar')
     <div class="py-8 bg-neutral-100">
         <div class="container mx-auto mt-7">
             <div class="flex justify-center items-center gap-9">
@@ -55,6 +57,7 @@
             </div>
         </div>
     </div>
-    <x-Subscribe />
-    <x-Footer />
-</x-Template>
+
+    @include('components.subscribe')
+    @include('components.footer')
+@endsection
