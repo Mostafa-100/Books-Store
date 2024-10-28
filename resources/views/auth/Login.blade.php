@@ -1,15 +1,15 @@
 @extends('components.template')
 
 @section('content')
-    @session('register-success')
+    @session('register.success')
         <div class="bg-green-500 p-3 text-white text-center">{{ session('register-success') }}</div>
     @endsession
 
-    @session('login-failure')
+    @session('login.failure')
         <div class="bg-red-500 p-3 text-white text-center">{{ session('login-failure') }}</div>
     @endsession
 
-    @session('reset-success')
+    @session('reset.success')
         <div class="bg-green-500 p-3 text-white text-center">{{ session('reset-success') }}</div>
     @endsession
 

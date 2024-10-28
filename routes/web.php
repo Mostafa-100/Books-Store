@@ -3,9 +3,11 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)
@@ -60,3 +62,9 @@ Route::get('/profile/edit', [UserController::class, 'edit'])
 Route::post('/profile/update', [UserController::class, 'update'])
   ->name('users.update')
   ->middleware('auth');
+
+Route::get('/verify', [EmailVerificationController::class, 'sendEmailVerification'])
+  ->name('email.sendEmailVerify');
+Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])
+  ->middleware(['auth', 'signed'])
+  ->name('verification.verify');

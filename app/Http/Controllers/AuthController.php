@@ -42,13 +42,16 @@ class AuthController extends Controller
     $validated['password'] = Hash::make($validated['password']);
 
     try {
-      User::create($validated);
+      $user = User::create($validated);
 
-      return to_route('login')->with('register-success', 'Registration has been completed successfully.');
-    } catch (\Exception $e) {
+      return to_route('login')->with(
+        'register.success',
+        'Registration has been completed successfully.'
+      );
+    } catch (\Exception) {
       return to_route('register')
         ->withErrors([
-          'register-error' => 'There was a problem with the registration. Please try again.'
+          'register.error' => 'There was a problem with the registration. Please try again.'
         ])->withInput();
     }
   }
@@ -62,9 +65,9 @@ class AuthController extends Controller
 
     if (Auth::attempt($validated)) {
       $request->session()->regenerate();
-      return to_route('home')->with('login-success', 'You are now logged in.');
+      return to_route('home')->with('login.success', 'You are now logged in.');
     } else {
-      return back()->with('login-failure', 'You are not registered on the site');
+      return back()->with('login.failure', 'You are not registered on the site');
     }
   }
 
@@ -118,7 +121,7 @@ class AuthController extends Controller
     });
 
     return $status === Password::PASSWORD_RESET
-      ? to_route('login')->with('reset-success', 'Your password has been successfully reset.')
+      ? to_route('login')->with('reset.success', 'Your password has been successfully reset.')
       : back()->withErrors(['email' => $status]);
   }
 }

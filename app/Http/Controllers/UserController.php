@@ -18,7 +18,7 @@ class UserController extends Controller
       'last_name',
       'email',
       'address',
-      'postal_code'
+      'postal_code',
     ]);
 
     $currentUserData['country'] = Auth::user()->country->name;
@@ -60,7 +60,7 @@ class UserController extends Controller
     } catch (\Exception $e) {
       return to_route('register')
         ->withErrors([
-          'register-error' => 'There was a problem with the registration. Please try again.'
+          'register.error' => 'There was a problem with the registration. Please try again.'
         ])->withInput();
     }
   }
