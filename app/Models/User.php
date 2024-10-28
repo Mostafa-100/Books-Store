@@ -20,13 +20,13 @@ class User extends Authenticatable
    */
   protected $fillable = [
     'username',
-    'firstName',
-    'last-name',
+    'first_name',
+    'last_name',
     'email',
     'password',
-    'country',
+    'country_id',
     'address',
-    'postalCode',
+    'postal_code',
   ];
 
   /**
@@ -50,5 +50,10 @@ class User extends Authenticatable
       'email_verified_at' => 'datetime',
       'password' => 'hashed',
     ];
+  }
+
+  function country()
+  {
+    return $this->belongsTo(Country::class);
   }
 }

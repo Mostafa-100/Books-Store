@@ -1,4 +1,6 @@
-<x-template>
+@extends('components.template')
+
+@section('content')
     @session('register-success')
         <div class="bg-green-500 p-3 text-white text-center">{{ session('register-success') }}</div>
     @endsession
@@ -60,10 +62,10 @@
 
             <p class="mt-10 text-center text-sm text-gray-500">
                 Dont have any account?
-                <a href={{ route('register') }}
-                    class="font-semibold leading-6 text-orange-500 hover:text-orange-600">Sign up</a>
+                <a href={{ route('register') }} class="font-semibold leading-6 text-orange-500 hover:text-orange-600">Sign
+                    up</a>
             </p>
         </div>
     </div>
 
-</x-template>
+@endsection

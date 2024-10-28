@@ -27,9 +27,9 @@
                         <input type="text" name='keyword' placeholder="Search by Title, Author, ISBN"
                             class="px-2 grow h-full focus:outline-none">
                     </div>
-                    @if ($errors->any())
+                    @error('keyword')
                         <div class="text-red-500 text-sm">{{ $errors->first() }}</div>
-                    @endif
+                    @enderror
                 </form>
                 <div>
                     <a href="flex items-center gap-x-1">

@@ -34,9 +34,6 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])
 Route::post('/login', [AuthController::class, 'authenticate'])
   ->name('authenticate');
 
-Route::get('/profile', [UserController::class, 'show'])->name('users.show')
-  ->middleware('auth');
-
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/forgot-password', [AuthController::class, 'forgotPasswordRequest'])
@@ -54,3 +51,12 @@ Route::get('/reset-password/{token}', [AuthController::class, 'showResetPassword
 Route::post('/reset-password', [AuthController::class, 'resetPassword'])
   ->middleware('guest')
   ->name('password.update');
+
+Route::get('/profile', [UserController::class, 'show'])->name('users.show')
+  ->middleware('auth');
+Route::get('/profile/edit', [UserController::class, 'edit'])
+  ->name('users.edit')
+  ->middleware('auth');
+Route::post('/profile/update', [UserController::class, 'update'])
+  ->name('users.update')
+  ->middleware('auth');

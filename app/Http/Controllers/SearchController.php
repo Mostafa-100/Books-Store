@@ -11,7 +11,9 @@ class SearchController extends Controller
   {
     $request->validate(['keyword' => 'required']);
 
-    $books = Book::where('title', 'LIKE', '%' . $request->keyword . '%')->get();
+    $keyword = $request->keyword;
+
+    $books = Book::where('title', 'LIKE', '%' . $keyword . '%')->get();
 
     return view('pages.search', compact('books', 'keyword'));
   }

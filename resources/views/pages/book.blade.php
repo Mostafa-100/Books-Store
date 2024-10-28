@@ -1,4 +1,4 @@
-@extends('template')
+@extends('components.template')
 
 @section('content')
     @include('components.navbar')

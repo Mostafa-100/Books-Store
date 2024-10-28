@@ -32,21 +32,24 @@ class AuthController extends Controller
       'last_name' => 'required|alpha|min:3|max:10',
       'email' => 'required|email|unique:users,email',
       'password' => 'required|min:7|max:20|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/|confirmed',
-      'country' => 'required|exists:countries,id',
+      'country_id' => 'required|exists:countries,id',
       'address' => 'required|string|max:255|regex:/^[0-9a-zA-Z\s]+$/',
       'postal_code' => 'required|digits_between:3,7'
     ], [
       'password.regex' => 'Password must include an uppercase letter, a lowercase letter, a number, and a special character.'
     ]);
 
+    $validated['password'] = Hash::make($validated['password']);
+
     try {
-      User::create($request->all());
-      return redirect()->route('login')->with('register-success', 'Registration has been completed successfully.');
+      User::create($validated);
+
+      return to_route('login')->with('register-success', 'Registration has been completed successfully.');
     } catch (\Exception $e) {
-      return back()
+      return to_route('register')
         ->withErrors([
           'register-error' => 'There was a problem with the registration. Please try again.'
-        ]);
+        ])->withInput();
     }
   }
 
@@ -59,7 +62,7 @@ class AuthController extends Controller
 
     if (Auth::attempt($validated)) {
       $request->session()->regenerate();
-      return redirect()->route('home')->with('login-success', 'You are now logged in.');
+      return to_route('home')->with('login-success', 'You are now logged in.');
     } else {
       return back()->with('login-failure', 'You are not registered on the site');
     }
@@ -69,7 +72,7 @@ class AuthController extends Controller
   {
     Auth::logout();
     $request->session()->invalidate();
-    return redirect()->route('home');
+    return to_route('home');
   }
 
   public function forgotPasswordRequest()
@@ -88,7 +91,7 @@ class AuthController extends Controller
     );
 
     return $status === Password::RESET_LINK_SENT
-      ? redirect()->route('login')->with('reset-success', 'A password reset link has been sent to your email. Please check your inbox.')
+      ? to_route('login')->with('reset-success', 'A password reset link has been sent to your email. Please check your inbox.')
       : back()->withErrors(['email' => $status]);
   }
 
@@ -115,7 +118,7 @@ class AuthController extends Controller
     });
 
     return $status === Password::PASSWORD_RESET
-      ? redirect()->route('login')->with('reset-success', 'Your password has been successfully reset.')
+      ? to_route('login')->with('reset-success', 'Your password has been successfully reset.')
       : back()->withErrors(['email' => $status]);
   }
 }

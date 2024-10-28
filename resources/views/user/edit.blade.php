@@ -10,7 +10,7 @@
     @endif
 
     <div class="grid place-items-center py-5">
-        <form method="post" action={{ route('register') }} class="bg-neutral-100 p-5 rounded-md">
+        <form method="post" action="{{ route('users.update') }}" class="bg-neutral-100 p-5 rounded-md">
             @csrf
             <div class="space-y-12">
                 <div class="border-b border-gray-900/10 pb-12">
@@ -24,8 +24,7 @@
                                     class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-orange-600 sm:max-w-md">
                                     <span
                                         class="flex select-none items-center pl-3 text-gray-500 sm:text-sm bg-white">{{ request()->getHost() }}/</span>
-                                    <input type="text" name="username" id="username" autocomplete="username"
-                                        value="{{ old('username') }}"
+                                    <input type="text" name="username" id="username" value="{{ $user->username }}"
                                         class="block flex-1 border-0 py-1.5 px-2 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                                         placeholder="janesmith">
                                 </div>
@@ -43,7 +42,7 @@
                             <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">First
                                 name</label>
                             <div class="mt-2">
-                                <input type="text" name="first_name" id="first-name" value="{{ old('first_name') }}"
+                                <input type="text" name="first_name" id="first-name" value="{{ $user->first_name }}"
                                     class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6">
                                 @error('first-name')
                                     <div class="text-red-500 text-sm">{{ $message }}</div>
@@ -56,7 +55,7 @@
                                 name</label>
                             <div class="mt-2">
                                 <input type="text" name="last_name" id="last-name" autocomplete="family-name"
-                                    value="{{ old('last_name') }}"
+                                    value="{{ $user->last_name }}"
                                     class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6">
                                 @error('last-name')
                                     <div class="text-red-500 text-sm">{{ $message }}</div>
@@ -69,31 +68,11 @@
                                 address</label>
                             <div class="mt-2">
                                 <input id="email" name="email" type="email" autocomplete="email"
-                                    value="{{ old('email') }}"
+                                    value="{{ $user->email }}"
                                     class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6">
                                 @error('email')
                                     <div class="text-red-500 text-sm">{{ $message }}</div>
                                 @enderror
-                            </div>
-                        </div>
-
-                        <div class="sm:col-span-full">
-                            <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
-                            <div class="mt-2">
-                                <input id="password" name="password" type="password"
-                                    class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6">
-                                @error('password')
-                                    <div class="text-red-500 text-sm">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="sm:col-span-full">
-                            <label for="confirm-password" class="block text-sm font-medium leading-6 text-gray-900">Re-type
-                                your password</label>
-                            <div class="mt-2">
-                                <input id="confirm-password" name="password_confirmation" type="password"
-                                    class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
 
@@ -103,7 +82,11 @@
                                 <select id="country" name="country_id" autocomplete="country-name"
                                     class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:max-w-xs sm:text-sm sm:leading-6">
                                     @foreach ($countries as $country)
-                                        <option value={{ $country->id }}>{{ $country->name }}</option>
+                                        @if ($country->id === $user->country->id)
+                                            <option value={{ $country->id }} selected>{{ $country->name }}</option>
+                                        @else
+                                            <option value={{ $country->id }}>{{ $country->name }}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                                 @error('country')
@@ -116,7 +99,7 @@
                             <label for="address" class="block text-sm font-medium leading-6 text-gray-900">
                                 address</label>
                             <div class="mt-2">
-                                <input type="text" name="address" value="{{ old('address') }}" id="address"
+                                <input type="text" name="address" value="{{ $user->address }}" id="address"
                                     autocomplete="street-address"
                                     class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6">
                                 @error('address')
@@ -128,7 +111,7 @@
                             <label for="postal-code" class="block text-sm font-medium leading-6 text-gray-900">ZIP /
                                 Postal code</label>
                             <div class="mt-2">
-                                <input type="text" name="postal_code" value="{{ old('postal_code') }}" id="postal-code"
+                                <input type="text" name="postal_code" value="{{ $user->postal_code }}" id="postal-code"
                                     class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6">
                                 @error('postal-code')
                                     <div class="text-red-500 text-sm">{{ $message }}</div>

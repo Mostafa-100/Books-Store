@@ -1,4 +1,4 @@
-<div class="glide__slide group shadow-lg p-1 mb-7">
+<div class="glide__slide group shadow-lg p-1">
     <a href={{ route('books.show', $book->id) }} class="flex items-center flex-col text-center">
         <img src={{ asset('storage/book_covers/' . $book->coverUrl) }}>
         <h3 class="font-medium text-lg group-hover:underline">{{ Str::words($book->title, 2) }}</h3>
