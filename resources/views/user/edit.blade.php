@@ -10,11 +10,11 @@
     @endif
 
     <div class="grid place-items-center py-5">
-        <form method="post" action="{{ route('users.update') }}" class="bg-neutral-100 p-5 rounded-md">
+        <form method="post" action="{{ route('users.update') }}" class="p-5 rounded-md">
             @csrf
             <div class="space-y-12">
                 <div class="border-b border-gray-900/10 pb-12">
-                    <h2 class="text-3xl font-semibold leading-7 text-gray-900">Sign up</h2>
+                    <h2 class="text-3xl font-semibold leading-7 text-gray-900">Update information</h2>
 
                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                         <div class="sm:col-span-4">
@@ -124,8 +124,7 @@
 
             <div class="mt-6 flex items-center justify-end gap-x-6">
                 <button type="submit"
-                    class="rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600">Sign
-                    up</button>
+                    class="rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600">Update</button>
             </div>
         </form>
     </div>

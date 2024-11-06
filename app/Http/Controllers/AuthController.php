@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Password as Pass;
 
 class AuthController extends Controller
 {
@@ -31,12 +32,11 @@ class AuthController extends Controller
       'first_name' => 'required|alpha|min:3|max:10',
       'last_name' => 'required|alpha|min:3|max:10',
       'email' => 'required|email|unique:users,email',
-      'password' => 'required|min:7|max:20|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/|confirmed',
+      'password' => 'required|min:7|max:20',
+      Pass::defaults(),
       'country_id' => 'required|exists:countries,id',
-      'address' => 'required|string|max:255|regex:/^[0-9a-zA-Z\s]+$/',
+      'address' => 'required|string|max:255',
       'postal_code' => 'required|digits_between:3,7'
-    ], [
-      'password.regex' => 'Password must include an uppercase letter, a lowercase letter, a number, and a special character.'
     ]);
 
     $validated['password'] = Hash::make($validated['password']);
@@ -108,9 +108,8 @@ class AuthController extends Controller
     $validated = $request->validate([
       'token' => 'required',
       'email' => 'required|email',
-      'password' => 'required|min:7|max:20|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/|confirmed',
-    ], [
-      'password.regex' => 'Password must include an uppercase letter, a lowercase letter, a number, and a special character.'
+      'password' => 'required|min:7|max:20',
+      Pass::defaults(),
     ]);
 
     $status = Password::reset($validated, function (User $user, $password) {

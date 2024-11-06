@@ -1,17 +1,14 @@
 @extends('components.template')
 
 @section('content')
-    @session('register.success')
-        <div class="bg-green-500 p-3 text-white text-center">{{ session('register-success') }}</div>
+    @session('register.success', 'reset-success')
+        <div class="bg-green-500 p-3 text-white text-center">{{ $value }}</div>
     @endsession
 
     @session('login.failure')
-        <div class="bg-red-500 p-3 text-white text-center">{{ session('login-failure') }}</div>
+        <div class="bg-red-500 p-3 text-white text-center">{{ $value }}</div>
     @endsession
 
-    @session('reset.success')
-        <div class="bg-green-500 p-3 text-white text-center">{{ session('reset-success') }}</div>
-    @endsession
 
     <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">

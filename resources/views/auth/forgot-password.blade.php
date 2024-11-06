@@ -2,6 +2,7 @@
     @error('email')
         <div class="bg-red-500 p-3 text-white text-center">{{ $message }}</div>
     @enderror
+
     <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <img class="mx-auto h-10 w-auto" src={{ asset('logo.png') }} alt="Your Company">

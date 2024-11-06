@@ -24,7 +24,7 @@
                 <form method="GET" action={{ route('search') }} class="grow">
                     <div class="flex items-center shadow-sm shadow-neutral-500 grow rounded-md self-end h-10 px-2 mt-3">
                         <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-                        <input type="text" name='keyword' placeholder="Search by Title, Author, ISBN"
+                        <input type="text" name='keyword' placeholder="Search by Title"
                             class="px-2 grow h-full focus:outline-none">
                     </div>
                     @error('keyword')

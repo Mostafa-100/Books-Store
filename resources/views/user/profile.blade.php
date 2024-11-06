@@ -7,7 +7,7 @@
         <div class="bg-blue-500 py-1 px-3 mx-auto mt-2 w-fit text-white text-center">{{ $value }}</div>
     @endsession
 
-    @session('verify.success')
+    @session('update-success', 'verify.success')
         <div class="bg-green-500 p-3 text-white text-center">{{ $value }}</div>
     @endsession
 

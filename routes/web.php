@@ -68,3 +68,7 @@ Route::get('/verify', [EmailVerificationController::class, 'sendEmailVerificatio
 Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])
   ->middleware(['auth', 'signed'])
   ->name('verification.verify');
+
+// Route::get('/test', function () {
+//   dd(auth()->user()->username);
+// });
