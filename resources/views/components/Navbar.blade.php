@@ -32,9 +32,11 @@
                     @enderror
                 </form>
                 <div>
-                    <a href="flex items-center gap-x-1">
+                    <a href="#" class="flex items-center gap-x-1">
                         <i class="fa-solid fa-basket-shopping"></i>
                         <span class="text-xs">MY CART</span>
+                        <div id='cart-number' class="bg-red-500 rounded text-white p-2 text-xs text-center">0
+                        </div>
                     </a>
                 </div>
             </div>

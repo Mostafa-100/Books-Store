@@ -2,13 +2,16 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Models\Book;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 Route::get('/', HomeController::class)
   ->name('home');
@@ -69,6 +72,10 @@ Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 've
   ->middleware(['auth', 'signed'])
   ->name('verification.verify');
 
-// Route::get('/test', function () {
-//   dd(auth()->user()->username);
-// });
+Route::get('/test', function (Request $request) {
+  $book = Book::find(1);
+  dump($book->carts->isEmpty());
+});
+
+Route::post('/add-to-cart', [CartController::class, 'addBookToCart']);
+Route::get('/get-cart', [CartController::class, 'getCart']);

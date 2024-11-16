@@ -22,11 +22,18 @@
                     <p class="mb-3">By <b>{{ $book->author->fullname }}</b></p>
                     <p class="mb-3">Category: </p>
                     <p class="text-3xl font-semibold">{{ $book->price }}</p>
-                    <a href="#"
-                        class="bg-orange-400 text-sm flex gap-x-2 w-fit rounded-md hover:bg-orange-500 cursor-pointer py-1.5 px-5 mt-4">
-                        <span>ADD TO CART</span>
-                        <i class="fa-solid fa-basket-shopping"></i>
-                    </a>
+                    @if (!$book->carts->isEmpty() || in_array($book->id, session('cart') ?? []))
+                        <button data-book-id="{{ $book->id }}" disabled
+                            class="flex gap-x-1 w-fit border-2 border-orange-500 disabled:border-neutral-300 text-xs enabled:text-orange-500 disabled:text-neutral-600 rounded-md py-1 px-6 mt-4 enabled:hover:bg-orange-100 enabled:transition-colors disabled:bg-neutral-300">
+                            <span>ADDED</span>
+                        </button>
+                    @else
+                        <button data-book-id="{{ $book->id }}"
+                            class="flex gap-x-1 w-fit border-2 border-orange-500 disabled:border-neutral-300 text-xs enabled:text-orange-500 disabled:text-neutral-600 rounded-md py-1 px-6 mt-4 enabled:hover:bg-orange-100 enabled:transition-colors disabled:bg-neutral-300">
+                            <span>ADD</span>
+                            <i class="fa-solid fa-basket-shopping"></i>
+                        </button>
+                    @endif
                 </div>
             </div>
         </div>
